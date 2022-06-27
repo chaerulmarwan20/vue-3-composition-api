@@ -1,37 +1,40 @@
 <template>
   <div>Count : {{ nilai }}</div>
   <button type="button" @click="add">Add</button>
-  <div>Result : {{ result }}</div>
 </template>
 
 <script>
-import { reactive, ref, computed, toRefs } from "vue";
+import { reactive, watchEffect, toRefs } from "vue";
 
 export default {
   setup() {
     const counter = reactive({
       nilai: 0,
+      foo: "bar",
     });
-    const addNum = ref(1);
 
     const add = () => {
-      result.value = 5;
       counter.nilai++;
     };
 
-    const result = computed({
-      get: () => {
-        return counter.nilai + addNum.value;
+    watchEffect(
+      () => {
+        console.log(counter.nilai);
       },
-      set: (val) => {
-        addNum.value = val;
-      },
-    });
+      {
+        flush: "post",
+        onTrigger(e) {
+          console.log("onTrigger", e);
+        },
+        onTrack(e) {
+          console.log("onTrack", e);
+        },
+      }
+    );
 
     return {
       ...toRefs(counter),
       add,
-      result,
     };
   },
 };
