@@ -1,20 +1,24 @@
 <template>
-  <div>{{ message }}</div>
+  <div>Name : {{ name }}</div>
+  <div>Age : {{ age }}</div>
 </template>
 
 <script>
-import { ref } from "vue";
+import { reactive, toRefs } from "vue";
 
 export default {
   setup() {
-    const message = ref("Hello World");
+    const user = reactive({
+      name: "Chaerul",
+      age: "22",
+    });
 
     setTimeout(() => {
-      message.value = "Halo Dunia";
+      user.name = "Marwan";
     }, 2000);
 
     return {
-      message,
+      ...toRefs(user),
     };
   },
 };
