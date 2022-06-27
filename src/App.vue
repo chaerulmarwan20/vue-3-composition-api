@@ -15,10 +15,18 @@ export default {
     const addNum = ref(1);
 
     const add = () => {
+      result.value = 5;
       counter.nilai++;
     };
 
-    const result = computed(() => counter.nilai + addNum.value);
+    const result = computed({
+      get: () => {
+        return counter.nilai + addNum.value;
+      },
+      set: (val) => {
+        addNum.value = val;
+      },
+    });
 
     return {
       ...toRefs(counter),
