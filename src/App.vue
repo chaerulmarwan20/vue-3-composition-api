@@ -1,52 +1,53 @@
-<template>
-  <div>Count : {{ nilai }}</div>
-  <button type="button" @click="add">Add</button>
-</template>
+<template></template>
 
 <script>
-import { reactive, ref, watch, toRefs } from "vue";
+import {
+  onBeforeMount,
+  onMounted,
+  onBeforeUpdate,
+  onUpdated,
+  onBeforeUnmount,
+  onUnmounted,
+  onActivated,
+  onDeactivated,
+  onErrorCaptured,
+} from "vue";
 
 export default {
   setup() {
-    const counter = reactive({
-      nilai: 0,
-      foo: "bar",
+    onBeforeMount(() => {
+      console.log("onBeforeMount");
     });
-    const num1 = ref(1);
-    const num2 = ref(2);
-
-    const add = () => {
-      // counter.nilai++;
-      num1.value++;
-      num2.value++;
-    };
-
-    // watch(num1, (after, before) => {
-    //   console.log(num1.value);
-    //   console.log("after", after);
-    //   console.log("before", before);
-    // });
-
-    // watch(
-    //   () => counter.nilai,
-    //   (after, before) => {
-    //     console.log(counter.nilai);
-    //     console.log("after", after);
-    //     console.log("before", before);
-    //   }
-    // );
-
-    watch([num1, num2], (after, before) => {
-      console.log("num1", num1.value);
-      console.log("num2", num2.value);
-      console.log("after", after);
-      console.log("before", before);
+    onMounted(() => {
+      console.log("onMounted");
     });
-
-    return {
-      ...toRefs(counter),
-      add,
-    };
+    onBeforeUpdate(() => {
+      console.log("onBeforeUpdate");
+    });
+    onMounted(() => {
+      console.log("onMounted");
+    });
+    onUpdated(() => {
+      console.log("onUpdated");
+    });
+    onBeforeUnmount(() => {
+      console.log("onBeforeUnmount");
+    });
+    onUnmounted(() => {
+      console.log("onUnmounted");
+    });
+    onActivated(() => {
+      // dijalankan ketika keep-alive diaktifkan
+      console.log("onActivated");
+    });
+    onDeactivated(() => {
+      // dijalankan ketika keep-alive dinonaktifkan
+      console.log("onDeactivated");
+    });
+    onErrorCaptured(() => {
+      // dijalankan ketika ada error di child component
+      console.log("onErrorCaptured");
+    });
   },
 };
 </script>
