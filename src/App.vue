@@ -1,53 +1,37 @@
-<template></template>
+<template>
+  <user-component :label="label" :user="user" class="active" @submit="onSubmit">
+    <div>Slot</div>
+  </user-component>
+  <button type="button" @click="changeName">Change</button>
+</template>
 
 <script>
-import {
-  onBeforeMount,
-  onMounted,
-  onBeforeUpdate,
-  onUpdated,
-  onBeforeUnmount,
-  onUnmounted,
-  onActivated,
-  onDeactivated,
-  onErrorCaptured,
-} from "vue";
+import { ref, reactive } from "vue";
+import UserComponent from "./components/UserComponent.vue";
 
 export default {
+  components: { UserComponent },
   setup() {
-    onBeforeMount(() => {
-      console.log("onBeforeMount");
+    const label = ref("biodata");
+    const user = reactive({
+      name: "Chaerul",
+      age: 22,
     });
-    onMounted(() => {
-      console.log("onMounted");
-    });
-    onBeforeUpdate(() => {
-      console.log("onBeforeUpdate");
-    });
-    onMounted(() => {
-      console.log("onMounted");
-    });
-    onUpdated(() => {
-      console.log("onUpdated");
-    });
-    onBeforeUnmount(() => {
-      console.log("onBeforeUnmount");
-    });
-    onUnmounted(() => {
-      console.log("onUnmounted");
-    });
-    onActivated(() => {
-      // dijalankan ketika keep-alive diaktifkan
-      console.log("onActivated");
-    });
-    onDeactivated(() => {
-      // dijalankan ketika keep-alive dinonaktifkan
-      console.log("onDeactivated");
-    });
-    onErrorCaptured(() => {
-      // dijalankan ketika ada error di child component
-      console.log("onErrorCaptured");
-    });
+
+    const changeName = () => {
+      user.name = "Marwan";
+    };
+
+    const onSubmit = (val) => {
+      console.log(val);
+    };
+
+    return {
+      label,
+      user,
+      changeName,
+      onSubmit,
+    };
   },
 };
 </script>
