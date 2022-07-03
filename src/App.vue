@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { ref, reactive, computed, toRefs, onMounted, toRef } from "vue";
+import { ref, reactive, computed, toRefs, onMounted } from "vue";
 import List from "./components/List.vue";
 
 export default {
